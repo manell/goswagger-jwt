@@ -24,7 +24,7 @@ auth := gsjwt.Auth{
 	ReturnFunction: func(values map[string]interface{}) (interface{}, error) {
 		sub, ok := values["sub"]
 		if !ok {
-			return nil, errors.New("Sub no provided")
+			return nil, errors.New("Sub not provided")
 		}
 		return sub, nil
 	}
