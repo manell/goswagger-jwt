@@ -7,7 +7,7 @@ Install the package in your ```$GOPATH``` running:
 go get github.com/manell/goswagger-jwt
 ```
 
-## Example usage
+## Usage
 Provided a swagger definition with the following authentication:
 ```yml
 securityDefinitions:
