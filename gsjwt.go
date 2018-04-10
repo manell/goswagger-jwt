@@ -9,7 +9,7 @@ import (
 
 // ReturnFunction is a function definition that recieves a JWT parsed into a map
 // and returns an empty interface or an error
-type ReturnFunction func(map[string]interface{}) (interface{}, error)
+type ReturnFunction func(jwt.Claims) (interface{}, error)
 
 // Auth contains some configuration related to the JWT parsing, as well as a callback
 // function for processing the resulting parsed JWT

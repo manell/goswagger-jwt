@@ -14,9 +14,9 @@ var Key = []byte("Sensual key")
 
 func createToken(t *testing.T) string {
 	token := jwt.New(jwt.SigningMethodHS256)
-
-	token.Claims["sub"] = "bar"
-	token.Claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+	claims := token.Claims.(jwt.MapClaims)
+	claims["sub"] = "bar"
+	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
 	tokenString, err := token.SignedString(Key)
 	if err != nil {
@@ -45,8 +45,9 @@ func TestAuthenticate(t *testing.T) {
 
 	auth := &Auth{
 		Key: Key,
-		ReturnFunction: func(values map[string]interface{}) (interface{}, error) {
-			return values["sub"], nil
+		ReturnFunction: func(claims jwt.Claims) (interface{}, error) {
+			mapClaims := claims.(jwt.MapClaims)
+			return mapClaims["sub"], nil
 		},
 	}
 
