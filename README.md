@@ -21,7 +21,8 @@ Create a new Auth instance with a callback function that validates the field sub
 ```go
 auth := gsjwt.Auth{
 	Key: []byte("My secret hmac key"),
-	ReturnFunction: func(values map[string]interface{}) (interface{}, error) {
+	ReturnFunction: func(claims jwt.Claims) (interface{}, error) {
+    values := claims.(jwt.MapClaims)
 		sub, ok := values["sub"]
 		if !ok {
 			return nil, errors.New("Sub not provided")
